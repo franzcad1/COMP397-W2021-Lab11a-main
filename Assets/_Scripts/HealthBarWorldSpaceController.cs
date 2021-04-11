@@ -4,17 +4,27 @@ using UnityEngine;
 
 public class HealthBarWorldSpaceController : MonoBehaviour
 {
-    public Transform playerCamera;
+    public Transform playerCameraTransform;
+    public GameObject playerCamera;
 
     void Start()
     {
-        playerCamera = GameObject.Find("PlayerCamera").transform;
+        playerCamera = GameObject.Find("PlayerCamera");
+        if (playerCamera)
+        {
+            playerCameraTransform = playerCameraTransform.transform;
+        }
+        
     }
 
 
     void LateUpdate()
     {
-        // billboard the healthBar
-        transform.LookAt(transform.position + playerCamera.forward);
+        if(playerCameraTransform)
+        {
+            // billboard the healthBar
+            transform.LookAt(transform.position + playerCameraTransform.forward);
+        }
+     
     }
 }
